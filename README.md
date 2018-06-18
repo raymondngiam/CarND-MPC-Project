@@ -3,7 +3,7 @@
 
 ### Overview
 
-This is a project for Udacity's Self Driving Car Nanodegree. The objective of this project is to implement Model Predictive Control in C++ to maneuver the vehicle around a race track in a simulated environment. The simulator will provide the desired future waypoints (from a path planning module), current global position of the vehicle and the velocity (mph). The cross track error CTE, appropriate steering angle and throttle command have to be determined at every measurement update.
+This is a project for Udacity's Self Driving Car Nanodegree. The objective of this project is to implement Model Predictive Control in C++ to maneuver the vehicle around a race track in a simulated environment. The simulator will provide the desired future waypoints (from a path planning module), current global position of the vehicle and the velocity (mph). The cross track error CTE, heading error, appropriate steering angle and throttle command have to be determined at every measurement update.
 
 ---
 
@@ -23,7 +23,7 @@ The car has 4 states, ![](https://latex.codecogs.com/gif.latex?(x,y,v,\psi)^{T})
 
 It also has 2 actuator inputs, ![](https://latex.codecogs.com/gif.latex?(\delta,a)^{T}), where ![](https://latex.codecogs.com/gif.latex?\delta) is the steering angle, and ![](https://latex.codecogs.com/gif.latex?a) is the acceleration.
 
-The next states are governed by the following dynamics:
+The states at the next time step are governed by the following dynamics:
 
 ![](https://latex.codecogs.com/gif.latex?x_%7Bt%2B1%7D%3Dx_%7Bt%7D%2Bv_%7Bt%7Dcos%28%5Cpsi_%7Bt%7D%29%5CDelta%20t)
 
@@ -31,11 +31,13 @@ The next states are governed by the following dynamics:
 
 ![](https://latex.codecogs.com/gif.latex?%5Cpsi_%7Bt%2B1%7D%3D%5Cpsi_%7Bt%7D%2B%5Cfrac%7Bv_%7Bt%7D%7D%7BL_%7Bf%7D%7D%5Cdelta_%7Bt%7D%5CDelta%20t)
 
-![](https://latex.codecogs.com/gif.latex?v_%7Bt%2B1%7D%3Dv%7Bt%7D%2Ba_%7Bt%7D%5CDelta%20t)
+![](https://latex.codecogs.com/gif.latex?v_%7Bt%2B1%7D%3Dv_%7Bt%7D%2Ba_%7Bt%7D%5CDelta%20t)
 
-**Cross Track Error (CTE) Computation**
+where ![](https://latex.codecogs.com/gif.latex?L_{f}) measures the distance between the center of mass of the vehicle and it's front axle. The larger the vehicle, the slower the turn rate.
 
-Given a set of waypoints for a trajectory ![](https://latex.codecogs.com/gif.latex?%5Cleft%5C%7B%28x_%7Bw%2C1%7D%2Cy_%7Bw%2C1%7D%29%5E%7BT%7D%2C%28x_%7Bw%2C2%7D%2Cy_%7Bw%2C2%7D%29%5E%7BT%7D%2C...%2C%28x_%7Bw%2Cn%7D%2Cy_%7Bw%2Cn%7D%29%5E%7BT%7D%5Cright%5C%7D) and the vehicle pose ![](https://latex.codecogs.com/gif.latex?%28x_%7Bp%7D%2Cy_%7Bp%7D%2C%5Cpsi_%7Bp%7D%29%5ET) both in global coordinate system. It would be useful if we can transform the coordinate system to car reference in order to simplify the CTE computation. This is achieved by the following:
+**Trajectory Polynomial Fitting**
+
+Given a set of waypoints for a trajectory ![](https://latex.codecogs.com/gif.latex?%5Cleft%5C%7B%28x_%7Bw%2C1%7D%2Cy_%7Bw%2C1%7D%29%5E%7BT%7D%2C%28x_%7Bw%2C2%7D%2Cy_%7Bw%2C2%7D%29%5E%7BT%7D%2C...%2C%28x_%7Bw%2Cn%7D%2Cy_%7Bw%2Cn%7D%29%5E%7BT%7D%5Cright%5C%7D) and the vehicle pose ![](https://latex.codecogs.com/gif.latex?%28x_%7Bp%7D%2Cy_%7Bp%7D%2C%5Cpsi_%7Bp%7D%29%5ET) both in global coordinate system. It would be useful if we can transform the coordinate system to car reference in order to simplify the subsequent computation. This is achieved by the following:
 
 The distance of each waypoint relative to the vehicle position in global coordinate system is calculated. This distance vector is denoted as ![](https://latex.codecogs.com/gif.latex?%5Cboldsymbol%7B%5E%7Bglobal%7D%5Ctextrm%7Bx%7D_%7Bcentered%7D%7D).
 
@@ -53,13 +55,31 @@ The transformed waypoints are then used to fit a third order polynomial as follo
 
 ![](https://latex.codecogs.com/gif.latex?f%28x%29%3Dc_%7B0%7D%2Bc_%7B1%7Dx%2Bc_%7B2%7Dx%5E%7B2%7D%2Bc_%7B3%7Dx%5E%7B2%7D)
 
-The CTE at car coordinate ![](https://latex.codecogs.com/gif.latex?%28x%2Cy%29) is then defined as:
-
-![](https://latex.codecogs.com/gif.latex?CTE%28x%2Cy%29%3Df%28x%29-y)
-
 **Heading Error Computation**
 
+Heading error, ![](https://latex.codecogs.com/gif.latex?e%5Cpsi) is the desired orientation subtracted from the current orientation
 
+![](https://latex.codecogs.com/gif.latex?e%5Cpsi_%7Bt%7D%3D%5Cpsi_%7Bt%7D-%5Cpsi%20des_%7Bt%7D)
+
+![](https://latex.codecogs.com/gif.latex?%5Cpsi%20des_%7Bt%7D) can be calculated as the tangential angle of the polynomial ![](https://latex.codecogs.com/gif.latex?f) evaluated at ![](https://latex.codecogs.com/gif.latex?x_{t})
+
+![](https://latex.codecogs.com/gif.latex?%5Cpsi%20des_%7Bt%7D%3D%5Carctan%28f%27%28x_t%29%29)
+
+The update rule for heading error is as follows:
+
+![](https://latex.codecogs.com/gif.latex?e%5Cpsi_%7Bt%2B1%7D%3De%5Cpsi_%7Bt%7D%2B%5Cfrac%7Bv_%7Bt%7D%7D%7BL_%7Bf%7D%7D%5Cdelta_%7Bt%7D%5CDelta%20t)
+
+**Cross Track Error (CTE) Computation**
+
+The CTE at car coordinate ![](https://latex.codecogs.com/gif.latex?%28x%2Cy%29) is then defined as:
+
+![](https://latex.codecogs.com/gif.latex?cte%28x%2Cy%29%3Df%28x%29-y)
+
+CTE at the next time step is defined as
+
+![](https://latex.codecogs.com/gif.latex?cte_%7Bt%2B1%7D%3Dcte_%7Bt%7D%2Bv_%7Bt%7Dsin%28e%5Cpsi%29%5CDelta%20t)
+
+![](https://latex.codecogs.com/gif.latex?cte_%7Bt%2B1%7D%3Df%28x_t%29-y_t%2Bv_%7Bt%7Dsin%28e%5Cpsi%29%5CDelta%20t)
 
 **Vehicle Kinematic Model**
 
