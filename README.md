@@ -127,7 +127,9 @@ In the case of driving a car, ![](https://latex.codecogs.com/gif.latex?T) should
 
 The choice of ![](https://latex.codecogs.com/gif.latex?dt) is also crucial here. MPC attempts to approximate a continuous reference trajectory by means of discrete paths between actuations. Larger values of ![](https://latex.codecogs.com/gif.latex?dt) result in less frequent actuations, which makes it harder to accurately approximate a continuous reference trajectory. This is sometimes called "discretization error".
 
-We optimize our actuator inputs at each step in time, in order to minimize the cost of our predicted trajectory.
+We optimize our actuator inputs at each step in time, in order to minimize the cost of our predicted trajectory. The cost function used is as shown below:
+
+![](https://latex.codecogs.com/gif.latex?J%3D%5Csum_%7Bi%3D1%7D%5E%7BN%7Dw_%7Bcte%7D%28cte_t-cte_%7Bref%7D%29%5E2%2Bw_%7Be%5Cpsi%7D%28e%5Cpsi_t-e%5Cpsi_%7Bref%7D%29%5E2%2Bw_%7Bv%7D%28v_t-v_%7Bref%7D%29%5E2%2Bw_%7B%5Cdelta%7D%5Cdelta_t%5E2%2Bw_%7Ba%7Da_t%5E2%2Bw_%7B%5Cdelta-rate%7D%28%5Cdelta_%7Bt%2B1%7D-%5Cdelta_%7Bt%7D%29%5E2%2Bw_%7Ba-rate%7D%28a_%7Bt%2B1%7D-a_%7Bt%7D%29%5E2)
 
 Once we found the lowest cost trajectory, we implement the very first set of actuation commands. Then we throw away the rest of the trajectory we calculated. Instead of using the entire old trajectory we predicted, we take our new state and use that to calculate a new optimal trajectory.
 
@@ -157,6 +159,8 @@ Here we run a simulation using the vehicle model starting from the current state
 ---
 
 ### Result
+
+The following three graphs show the 
 
 <img src="/images/cte.png" width="600">
 
