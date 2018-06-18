@@ -115,7 +115,7 @@ Model Predictive Control reframes the problem of following a trajectory as an op
 
 Imagine that we know our current state and the reference trajectory we want to follow. We first define the number of time step, ![](https://latex.codecogs.com/gif.latex?N) and the timestep duration, ![](https://latex.codecogs.com/gif.latex?dt).
 
-<img src="/images/MPC-N-dt.png" width="400">
+<img src="/images/MPC-N-dt.png" width="600">
 
 In the figure above, the blue line is the reference trajectory and the red line the trajectory computed by Model Predictive Control. In this example the horizon has 7 steps, ![](https://latex.codecogs.com/gif.latex?N), and the space in between white pebbles signifies the time elapsed, ![](https://latex.codecogs.com/gif.latex?dt).
 
@@ -125,11 +125,11 @@ Once we found the lowest cost trajectory, we implement the very first set of act
 
 The figure below shows the trajectory computed:
 
-<img src="/images/trajectory-0.png" width="400">
+<img src="/images/trajectory-0.png" width="600">
 
-The car then takes only the first set of actuation commands toward the next time s
+The car then takes only the first set of actuation commands toward the next execution time step.
 
-<img src="/images/trajectory-1.png" width="400">
+<img src="/images/trajectory-1.png" width="600">
 
 The reason we do not just carry out the entire trajectory we calculated during the first pass is that our model is only approximate. Despite our best effort, it won't match the real world exactly. Once we performed our actuation commands, our trajectory might not be exactly the same as the trajectory we predicted. So, it's crucial that we constantly re-evaluate to find the optimal actuations.
 
