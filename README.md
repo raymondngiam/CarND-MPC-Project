@@ -17,9 +17,21 @@ This is a project for Udacity's Self Driving Car Nanodegree. The objective of th
 
 **Vehicle Model**
 
-<img src="/images/vehicle-model.png" width="600">
+The car has 4 states, ![](https://latex.codecogs.com/gif.latex?(x,y,v,\psi)^{T}) as illustrated in the figure below:
 
-The car has 4 states, ![](https://latex.codecogs.com/gif.latex?(x,y,v,\psi))
+<img src="/images/vehicle-model.png" width="400">
+
+It also has 2 actuator inputs, ![](https://latex.codecogs.com/gif.latex?(\delta,a)^{T}), where ![](https://latex.codecogs.com/gif.latex?\delta) is the steering angle, and ![](https://latex.codecogs.com/gif.latex?a) is the acceleration.
+
+The next states are governed by the following dynamics:
+
+![](https://latex.codecogs.com/gif.latex?x_{t+1}=x_{t}+v_{t}cos(psi_{t})\delta t)
+
+![](https://latex.codecogs.com/gif.latex?)
+
+![](https://latex.codecogs.com/gif.latex?)
+
+![](https://latex.codecogs.com/gif.latex?)
 
 **Cross Track Error (CTE) Computation**
 
