@@ -109,13 +109,27 @@ The constraints in the simulation environment are as follows:
 
 The steering angle is limited to be between -25 degree to +25 degree, and the acceleration (or throttle) is limit to be between -1 and +1.
 
-**Model Predictive Control Overview**
+**Model Predictive Control**
 
 Model Predictive Control reframes the problem of following a trajectory as an optimization problem. It involves simulating different actuator inputs, prediction the resulting trajectory and selecting the trajectory with a minimum cost.
 
-Imagine that we know our current state and the reference trajectory we want to follow. We optimize our actuator inputs at each step in time, in order to minimize the cost of our predicted trajectory.
+Imagine that we know our current state and the reference trajectory we want to follow. We first define the number of time step, ![](https://latex.codecogs.com/gif.latex?N) and the timestep duration, ![](https://latex.codecogs.com/gif.latex?dt).
+
+<img src="/images/MPC-N-dt.png" width="400">
+
+In the figure above, the blue line is the reference trajectory and the red line the trajectory computed by Model Predictive Control. In this example the horizon has 7 steps, ![](https://latex.codecogs.com/gif.latex?N), and the space in between white pebbles signifies the time elapsed, ![](https://latex.codecogs.com/gif.latex?dt).
+
+We optimize our actuator inputs at each step in time, in order to minimize the cost of our predicted trajectory.
 
 Once we found the lowest cost trajectory, we implement the very first set of actuation commands. Then we throw away the rest of the trajectory we calculated. Instead of using the entire old trajectory we predicted, we take our new state and use that to calculate a new optimal trajectory.
+
+The figure below shows the trajectory computed:
+
+<img src="/images/trajectory-0.png" width="400">
+
+The car then takes only the first set of actuation commands toward the next time s
+
+<img src="/images/trajectory-1.png" width="400">
 
 The reason we do not just carry out the entire trajectory we calculated during the first pass is that our model is only approximate. Despite our best effort, it won't match the real world exactly. Once we performed our actuation commands, our trajectory might not be exactly the same as the trajectory we predicted. So, it's crucial that we constantly re-evaluate to find the optimal actuations.
 
