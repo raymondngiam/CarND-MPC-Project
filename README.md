@@ -19,13 +19,17 @@ This is a project for Udacity's Self Driving Car Nanodegree. The objective of th
 
 Given a set of waypoints for a trajectory ![](https://latex.codecogs.com/gif.latex?%5Cleft%5C%7B%28x_%7Bw%2C1%7D%2Cy_%7Bw%2C1%7D%29%5E%7BT%7D%2C%28x_%7Bw%2C2%7D%2Cy_%7Bw%2C2%7D%29%5E%7BT%7D%2C...%2C%28x_%7Bw%2Cn%7D%2Cy_%7Bw%2Cn%7D%29%5E%7BT%7D%5Cright%5C%7D) and the vehicle pose ![](https://latex.codecogs.com/gif.latex?%28x_%7Bp%7D%2Cy_%7Bp%7D%2C%5Ctheta_%7Bp%7D%29%5ET) both in global coordinate system. It would be useful if we can transform the coordinate system to car reference in order to simplify the CTE computation. This is achieved by the following:
 
-The distance of each waypoint in global coordinate system is calculated with relative to the vehicle position in global coordinate system. This distance vector is denoted as ![](https://latex.codecogs.com/gif.latex?%5Cboldsymbol%7B%5E%7Bglobal%7D%5Ctextrm%7Bx%7D_%7Bcentered%7D%7D)
+The distance of each waypoint relative to the vehicle position in global coordinate system is calculated. This distance vector is denoted as ![](https://latex.codecogs.com/gif.latex?%5Cboldsymbol%7B%5E%7Bglobal%7D%5Ctextrm%7Bx%7D_%7Bcentered%7D%7D).
 
 ![](https://latex.codecogs.com/gif.latex?%5Cboldsymbol%7B%5E%7Bglobal%7D%5Ctextrm%7Bx%7D_%7Bcentered%7D%7D%3D%5Cbegin%7Bpmatrix%7Dx_%7Bcentered%7D%5C%5Cy_%7Bcentered%7D%5Cend%7Bpmatrix%7D%3D%5Cbegin%7Bpmatrix%7Dx_%7Bw%2Ci%7D%5C%5Cy_%7Bw%2Ci%7D%5Cend%7Bpmatrix%7D-%5Cbegin%7Bpmatrix%7Dx_%7Bp%7D%5C%5Cy_%7Bp%7D%5Cend%7Bpmatrix%7D)
 
-The waypoint in car coordinate system 
+The waypoint in car coordinate system is then 
 
 ![](https://latex.codecogs.com/gif.latex?%5Cboldsymbol%7B%5E%7Bcar%7D%5Ctextrm%7Bx%7D_%7Bw%2Ci%7D%7D%3D%5Cboldsymbol%7B%5E%7Bcar%7D%5Ctextrm%7BR%7D_%7Bglobal%7D%7D%5Ccdot%20%5Cboldsymbol%7B%5E%7Bglobal%7D%5Ctextrm%7Bx%7D_%7Bcentered%7D%7D)
+
+where 
+
+![](https://latex.codecogs.com/gif.latex?%5Cboldsymbol%7B%5E%7Bcar%7D%5Ctextrm%7BR%7D_%7Bglobal%7D%7D%3D%5Cbegin%7Bbmatrix%7Dcos%28-%5Ctheta_%7Bp%7D%29%26-sin%28-%5Ctheta_%7Bp%7D%29%5C%5Csin%28-%5Ctheta_%7Bp%7D%29%26cos%28-%5Ctheta_%7Bp%7D%29%5Cend%7Bbmatrix%7D)
 
 **Vehicle Kinematic Model**
 
