@@ -3,7 +3,7 @@
 
 ### Overview
 
-This is a project for Udacity's Self Driving Car Nanodegree. The objective of this project is to implement Model Predictive Control in C++ to maneuver the vehicle around a race track in a simulated environment. The simulator will provide the desired future waypoints (from a path planning module), current global position of the vehicle and the velocity (mph). The appropriate steering angle and throttle command have to be determined at every measurement update.
+This is a project for Udacity's Self Driving Car Nanodegree. The objective of this project is to implement Model Predictive Control in C++ to maneuver the vehicle around a race track in a simulated environment. The simulator will provide a set of desired future waypoints, current global position of the vehicle and the velocity (mph). The appropriate steering angle and throttle command have to be determined at every measurement update.
 
 ---
 
@@ -120,6 +120,12 @@ Imagine that we know our current state and the reference trajectory we want to f
 <img src="/images/MPC-N-dt.png" width="600">
 
 In the figure above, the blue line is the reference trajectory and the red line the trajectory computed by Model Predictive Control. In this example the horizon has 7 steps, ![](https://latex.codecogs.com/gif.latex?N), and the space in between white pebbles signifies the time elapsed, ![](https://latex.codecogs.com/gif.latex?dt).
+
+In this project, the ![](https://latex.codecogs.com/gif.latex?N) and ![](https://latex.codecogs.com/gif.latex?dt) parameters are set to be 10 and 0.1 respectively. Thus, the effective prediction horizon, ![](https://latex.codecogs.com/gif.latex?T) here is `10*0.1=1 second`. 
+
+In the case of driving a car, ![](https://latex.codecogs.com/gif.latex?T) should be a few seconds, at most. Beyond that horizon, the environment will change enough that it won't make sense to predict any further into the future.
+
+The choice of ![](https://latex.codecogs.com/gif.latex?dt) is also crucial here. MPC attempts to approximate a continuous reference trajectory by means of discrete paths between actuations. Larger values of ![](https://latex.codecogs.com/gif.latex?dt) result in less frequent actuations, which makes it harder to accurately approximate a continuous reference trajectory. This is sometimes called "discretization error".
 
 We optimize our actuator inputs at each step in time, in order to minimize the cost of our predicted trajectory.
 
