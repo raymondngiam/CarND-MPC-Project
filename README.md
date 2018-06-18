@@ -11,6 +11,8 @@ This is a project for Udacity's Self Driving Car Nanodegree. The objective of th
 
 <img src="/images/demo.gif" width="600">
 
+The yellow is a polynomial fitted to waypoints and the green line represents the x and y coordinates of the MPC trajectory.
+
 ---
 
 ### Implementation Summary
