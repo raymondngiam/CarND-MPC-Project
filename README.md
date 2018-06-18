@@ -85,6 +85,8 @@ CTE at the next time step is defined as
 
 **Full Vehicle Kinematic Model**
 
+The crucial equations for the full kinematic model are summarized below:
+
 ![](https://latex.codecogs.com/gif.latex?x_%7Bt%2B1%7D%3Dx_%7Bt%7D%2Bv_%7Bt%7Dcos%28%5Cpsi_%7Bt%7D%29%5CDelta%20t)
 
 ![](https://latex.codecogs.com/gif.latex?y_%7Bt%2B1%7D%3Dy_%7Bt%7D%2Bv_%7Bt%7Dsin%28%5Cpsi_%7Bt%7D%29%5CDelta%20t)
@@ -96,6 +98,16 @@ CTE at the next time step is defined as
 ![](https://latex.codecogs.com/gif.latex?cte_%7Bt%2B1%7D%3Df%28x_t%29-y_t%2Bv_%7Bt%7Dsin%28e%5Cpsi%29%5CDelta%20t)
 
 ![](https://latex.codecogs.com/gif.latex?e%5Cpsi_%7Bt%2B1%7D%3D%5Cpsi_%7Bt%7D-%5Cpsi%20des_%7Bt%7D%2B%5Cfrac%7Bv_%7Bt%7D%7D%7BL_%7Bf%7D%7D%5Cdelta_%7Bt%7D%5CDelta%20t)
+
+**Constraints**
+
+The constraints in the simulation environment are as follows:
+
+![](https://latex.codecogs.com/gif.latex?\delta\in[-25^{\circ},25^{\circ}])
+
+![](https://latex.codecogs.com/gif.latex?a\in[-1,1])
+
+The steering angle is limited to be between -25 degree to +25 degree, and the acceleration (or throttle) is limit to be between -1 and +1.
 
 **Model Predictive Control Overview**
 
@@ -114,13 +126,9 @@ In a real car, an actuation command won't execute instantly - there will be a de
 
 This is a problem called "latency", and it's a difficult challenge for some controllers - like a PID controller - to overcome. But a Model Predictive Controller can adapt quite well because we can model this latency in the system.
 
-PID Controller
-
 PID controllers will calculate the error with respect to the present state, but the actuation will be performed when the vehicle is in a future (and likely different) state. This can sometimes lead to instability.
 
 The PID controller could try to compute a control input based on a future error, but without a vehicle model it's unlikely this will be accurate.
-
-Model Predictive Control
 
 A contributing factor to latency is actuator dynamics. For example the time elapsed between when you command a steering angle to when that angle is actually achieved. This could easily be modeled by a simple dynamic system and incorporated into the vehicle model. One approach would be running a simulation using the vehicle model starting from the current state for the duration of the latency. The resulting state from the simulation is the new initial state for MPC.
 
