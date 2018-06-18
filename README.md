@@ -3,7 +3,7 @@
 
 ### Overview
 
-This is a project for Udacity's Self Driving Car Nanodegree. The objective of this project is to implement Model Predictive Control in C++ to maneuver the vehicle around a race track in a simulated environment. The simulator will provide the desired future waypoints (from a path planning module), current global position of the vehicle and the velocity (mph). The cross track error CTE, heading error, appropriate steering angle and throttle command have to be determined at every measurement update.
+This is a project for Udacity's Self Driving Car Nanodegree. The objective of this project is to implement Model Predictive Control in C++ to maneuver the vehicle around a race track in a simulated environment. The simulator will provide the desired future waypoints (from a path planning module), current global position of the vehicle and the velocity (mph). The appropriate steering angle and throttle command have to be determined at every measurement update.
 
 ---
 
