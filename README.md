@@ -121,6 +121,8 @@ Imagine that we know our current state and the reference trajectory we want to f
 
 In the figure above, the blue line is the reference trajectory and the red line the trajectory computed by Model Predictive Control. In this example the horizon has 7 steps, ![](https://latex.codecogs.com/gif.latex?N), and the space in between white pebbles signifies the time elapsed, ![](https://latex.codecogs.com/gif.latex?dt).
 
+The prediction horizon is the duration over which future predictions are made. We’ll refer to this as ![](https://latex.codecogs.com/gif.latex?T). ![](https://latex.codecogs.com/gif.latex?T) is the product of ![](https://latex.codecogs.com/gif.latex?N) and ![](https://latex.codecogs.com/gif.latex?dt).
+
 In the case of driving a car, ![](https://latex.codecogs.com/gif.latex?T) should be a few seconds, at most. Beyond that horizon, the environment will change enough that it won't make sense to predict any further into the future.
 
 The choice of ![](https://latex.codecogs.com/gif.latex?dt) is also crucial here. MPC attempts to approximate a continuous reference trajectory by means of discrete paths between actuations. Larger values of ![](https://latex.codecogs.com/gif.latex?dt) result in less frequent actuations, which makes it harder to accurately approximate a continuous reference trajectory. This is sometimes called "discretization error".
