@@ -25,13 +25,13 @@ It also has 2 actuator inputs, ![](https://latex.codecogs.com/gif.latex?(\delta,
 
 The next states are governed by the following dynamics:
 
-![](https://latex.codecogs.com/gif.latex?x_{t+1}=x_{t}+v_{t}cos(psi_{t})\delta t)
+![](https://latex.codecogs.com/gif.latex?x_%7Bt%2B1%7D%3Dx_%7Bt%7D%2Bv_%7Bt%7Dcos%28%5Cpsi_%7Bt%7D%29%5CDelta%20t)
 
-![](https://latex.codecogs.com/gif.latex?)
+![](https://latex.codecogs.com/gif.latex?y_%7Bt%2B1%7D%3Dy_%7Bt%7D%2Bv_%7Bt%7Dsin%28%5Cpsi_%7Bt%7D%29%5CDelta%20t)
 
-![](https://latex.codecogs.com/gif.latex?)
+![](https://latex.codecogs.com/gif.latex?%5Cpsi_%7Bt%2B1%7D%3D%5Cpsi_%7Bt%7D%2B%5Cfrac%7Bv_%7Bt%7D%7D%7BL_%7Bf%7D%7D%5Cdelta_%7Bt%7D%5CDelta%20t)
 
-![](https://latex.codecogs.com/gif.latex?)
+![](https://latex.codecogs.com/gif.latex?v_%7Bt%2B1%7D%3Dv%7Bt%7D%2Ba_%7Bt%7D%5CDelta%20t)
 
 **Cross Track Error (CTE) Computation**
 
