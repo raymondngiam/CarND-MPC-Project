@@ -9,7 +9,7 @@ This is a project for Udacity's Self Driving Car Nanodegree. The objective of th
 
 ### Video Demo
 
-
+<img src="/images/demo.gif" width="600">
 
 ---
 
@@ -147,4 +147,44 @@ The PID controller could try to compute a control input based on a future error,
 A contributing factor to latency is actuator dynamics. For example the time elapsed between when you command a steering angle to when that angle is actually achieved. This could easily be modeled by a simple dynamic system and incorporated into the vehicle model. One approach would be running a simulation using the vehicle model starting from the current state for the duration of the latency. The resulting state from the simulation is the new initial state for MPC.
 
 Thus, MPC can deal with latency much more effectively, by explicitly taking it into account, than a PID controller.
+
+---
+
+### Result
+
+---
+
+### Installation
+
+1. Download the Udacity Self Driving Car Nanodegree simulator from [here](https://github.com/udacity/self-driving-car-sim/releases).
+
+2. Set up and install [uWebSocketIO](https://github.com/uWebSockets/uWebSockets) by running the shell script in the project top directory:
+
+```
+$ install-ubuntu.sh
+```
+
+**Other Important Dependencies**
+
+* cmake >= 3.5
+* make >= 4.1
+* gcc/g++ >= 5.4
+
+---
+
+### How to run
+
+The main program can be built and run by doing the following from the project top directory.
+
+1. mkdir build
+
+2. cd build
+
+3. cmake ..
+
+4. make
+
+5. ./mpc
+
+Open the simulator, select `Project 5: MPC Controller`
 
