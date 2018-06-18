@@ -213,8 +213,9 @@ $ install-ubuntu.sh
 * cmake >= 3.5
 * make >= 4.1
 * gcc/g++ >= 5.4
-* **Ipopt and CppAD:** Please refer to [this document](https://github.com/raymondngiam/CarND-MPC-Project/blob/master/install_Ipopt_CppAD.md) for installation instructions.
+* **Ipopt and CppAD:** Please refer to [this document](./install_Ipopt_CppAD.md) for installation instructions.
 * [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page). This is already part of the repo so you shouldn't have to worry about it.
+* Not a dependency but read the [DATA.md](./DATA.md) for a description of the data sent back from the simulator.
 
 ---
 
