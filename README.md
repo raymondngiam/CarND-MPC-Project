@@ -31,6 +31,14 @@ where
 
 ![](https://latex.codecogs.com/gif.latex?%5Cboldsymbol%7B%5E%7Bcar%7D%5Ctextrm%7BR%7D_%7Bglobal%7D%7D%3D%5Cbegin%7Bbmatrix%7Dcos%28-%5Ctheta_%7Bp%7D%29%26-sin%28-%5Ctheta_%7Bp%7D%29%5C%5Csin%28-%5Ctheta_%7Bp%7D%29%26cos%28-%5Ctheta_%7Bp%7D%29%5Cend%7Bbmatrix%7D)
 
+The transformed waypoints are then used to fit a third order polynomial as follows:
+
+![](https://latex.codecogs.com/gif.latex?f%28x%29%3Dc_%7B0%7D%2Bc_%7B1%7Dx%2Bc_%7B2%7Dx%5E%7B2%7D%2Bc_%7B3%7Dx%5E%7B2%7D)
+
+The CTE at car coordinate ![](https://latex.codecogs.com/gif.latex?%28x%2Cy%29) is then defined as:
+
+![](https://latex.codecogs.com/gif.latex?CTE%28x%2Cy%29%3Df%28x%29-y)
+
 **Vehicle Kinematic Model**
 
 **Model Predictive Control Overview**
