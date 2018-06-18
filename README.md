@@ -15,9 +15,15 @@ This is a project for Udacity's Self Driving Car Nanodegree. The objective of th
 
 ### Implementation Summary
 
+**Vehicle Model**
+
+<img src="/images/vehicle-model.png" width="600">
+
+The car has 4 states, ![](https://latex.codecogs.com/gif.latex?(x,y,v,\psi))
+
 **Cross Track Error (CTE) Computation**
 
-Given a set of waypoints for a trajectory ![](https://latex.codecogs.com/gif.latex?%5Cleft%5C%7B%28x_%7Bw%2C1%7D%2Cy_%7Bw%2C1%7D%29%5E%7BT%7D%2C%28x_%7Bw%2C2%7D%2Cy_%7Bw%2C2%7D%29%5E%7BT%7D%2C...%2C%28x_%7Bw%2Cn%7D%2Cy_%7Bw%2Cn%7D%29%5E%7BT%7D%5Cright%5C%7D) and the vehicle pose ![](https://latex.codecogs.com/gif.latex?%28x_%7Bp%7D%2Cy_%7Bp%7D%2C%5Ctheta_%7Bp%7D%29%5ET) both in global coordinate system. It would be useful if we can transform the coordinate system to car reference in order to simplify the CTE computation. This is achieved by the following:
+Given a set of waypoints for a trajectory ![](https://latex.codecogs.com/gif.latex?%5Cleft%5C%7B%28x_%7Bw%2C1%7D%2Cy_%7Bw%2C1%7D%29%5E%7BT%7D%2C%28x_%7Bw%2C2%7D%2Cy_%7Bw%2C2%7D%29%5E%7BT%7D%2C...%2C%28x_%7Bw%2Cn%7D%2Cy_%7Bw%2Cn%7D%29%5E%7BT%7D%5Cright%5C%7D) and the vehicle pose ![](https://latex.codecogs.com/gif.latex?%28x_%7Bp%7D%2Cy_%7Bp%7D%2C%5Cpsi_%7Bp%7D%29%5ET) both in global coordinate system. It would be useful if we can transform the coordinate system to car reference in order to simplify the CTE computation. This is achieved by the following:
 
 The distance of each waypoint relative to the vehicle position in global coordinate system is calculated. This distance vector is denoted as ![](https://latex.codecogs.com/gif.latex?%5Cboldsymbol%7B%5E%7Bglobal%7D%5Ctextrm%7Bx%7D_%7Bcentered%7D%7D).
 
@@ -29,7 +35,7 @@ The waypoint in car coordinate system is then
 
 where 
 
-![](https://latex.codecogs.com/gif.latex?%5Cboldsymbol%7B%5E%7Bcar%7D%5Ctextrm%7BR%7D_%7Bglobal%7D%7D%3D%5Cbegin%7Bbmatrix%7Dcos%28-%5Ctheta_%7Bp%7D%29%26-sin%28-%5Ctheta_%7Bp%7D%29%5C%5Csin%28-%5Ctheta_%7Bp%7D%29%26cos%28-%5Ctheta_%7Bp%7D%29%5Cend%7Bbmatrix%7D)
+![](https://latex.codecogs.com/gif.latex?%5Cboldsymbol%7B%5E%7Bcar%7D%5Ctextrm%7BR%7D_%7Bglobal%7D%7D%3D%5Cbegin%7Bbmatrix%7Dcos%28-%5Cpsi_%7Bp%7D%29%26-sin%28-%5Cpsi_%7Bp%7D%29%5C%5Csin%28-%5Cpsi_%7Bp%7D%29%26cos%28-%5Cpsi_%7Bp%7D%29%5Cend%7Bbmatrix%7D)
 
 The transformed waypoints are then used to fit a third order polynomial as follows:
 
@@ -38,6 +44,10 @@ The transformed waypoints are then used to fit a third order polynomial as follo
 The CTE at car coordinate ![](https://latex.codecogs.com/gif.latex?%28x%2Cy%29) is then defined as:
 
 ![](https://latex.codecogs.com/gif.latex?CTE%28x%2Cy%29%3Df%28x%29-y)
+
+**Heading Error Computation**
+
+
 
 **Vehicle Kinematic Model**
 
