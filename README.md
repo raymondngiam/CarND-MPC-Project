@@ -37,7 +37,7 @@ The states at the next time step are governed by the following dynamics:
 
 where ![](https://latex.codecogs.com/gif.latex?L_{f}) measures the distance between the center of mass of the vehicle and it's front axle. The larger the vehicle, the slower the turn rate.
 
-The value of ![](https://latex.codecogs.com/gif.latex?L_{f}) can be determined empirically. Using the vehicle in simulated environment, we drive at constant steering angle and velocity. We incrementally adjust ![](https://latex.codecogs.com/gif.latex?L_{f}) such that the trajectory produced is a circle, with all other variables held constant. The figure below shows such trajectory with a constant delta value of 1 degree and ![](https://latex.codecogs.com/gif.latex?L_{f}) of 2.67.
+The value of ![](https://latex.codecogs.com/gif.latex?L_{f}) can be determined empirically. Using the vehicle in simulated environment, we drive at constant steering angle and velocity. We incrementally adjust ![](https://latex.codecogs.com/gif.latex?L_{f}) such that the trajectory produced is a circle, with all other variables held constant. The figure below shows such trajectory with a constant ![](https://latex.codecogs.com/gif.latex?\delta) value of 1 degree and ![](https://latex.codecogs.com/gif.latex?L_{f}) of 2.67.
 
 <img src="/images/lf.png" width="400">
 
