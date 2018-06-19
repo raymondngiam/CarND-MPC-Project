@@ -37,6 +37,10 @@ The states at the next time step are governed by the following dynamics:
 
 where ![](https://latex.codecogs.com/gif.latex?L_{f}) measures the distance between the center of mass of the vehicle and it's front axle. The larger the vehicle, the slower the turn rate.
 
+The value of ![](https://latex.codecogs.com/gif.latex?L_{f}) can be determined empirically. Using the vehicle in simulated environment, we drive at constant steering angle and velocity. We incrementally adjust ![](https://latex.codecogs.com/gif.latex?L_{f}) such that the trajectory produced is a circle, with all other variables held constant. The figure below shows such trajectory with a constant delta value of 1 degree and ![](https://latex.codecogs.com/gif.latex?L_{f}) of 2.67.
+
+<img src="/images/lf.png" width="400">
+
 **Trajectory Polynomial Fitting**
 
 Given a set of waypoints for a trajectory ![](https://latex.codecogs.com/gif.latex?%5Cleft%5C%7B%28x_%7Bw%2C1%7D%2Cy_%7Bw%2C1%7D%29%5E%7BT%7D%2C%28x_%7Bw%2C2%7D%2Cy_%7Bw%2C2%7D%29%5E%7BT%7D%2C...%2C%28x_%7Bw%2Cn%7D%2Cy_%7Bw%2Cn%7D%29%5E%7BT%7D%5Cright%5C%7D) and the vehicle pose ![](https://latex.codecogs.com/gif.latex?%28x_%7Bp%7D%2Cy_%7Bp%7D%2C%5Cpsi_%7Bp%7D%29%5ET) both in global coordinate system. It would be useful if we can transform the coordinate system to car reference in order to simplify the subsequent computations. This is achieved by the following:
