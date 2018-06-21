@@ -149,9 +149,9 @@ The weights for each of the cost terms are fine tuned manually and the final con
 
 |        | Value   |
 | ------:|-------:|
-| ![](https://latex.codecogs.com/gif.latex?w_{cte})      	| 0.02 |
+| ![](https://latex.codecogs.com/gif.latex?w_{cte})      	| 15 |
 | ![](https://latex.codecogs.com/gif.latex?w_{e\psi})     	| 15 |
-| ![](https://latex.codecogs.com/gif.latex?w_{v})	 		| 15 |
+| ![](https://latex.codecogs.com/gif.latex?w_{v})	 		| 0.02 |
 | ![](https://latex.codecogs.com/gif.latex?w_{\delta})	 	| 20000 |
 | ![](https://latex.codecogs.com/gif.latex?w_{a})	 		| 0 |
 | ![](https://latex.codecogs.com/gif.latex?w_{\delta-rate})	| 250000 |
